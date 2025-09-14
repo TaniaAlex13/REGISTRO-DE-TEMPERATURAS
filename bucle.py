@@ -43,3 +43,35 @@ for i, ciudad in enumerate(ciudades, start=1):  # ciudades desde 1
         print(f"  Semana {j}: Promedio = {promedio:.2f} °C")
         for k, temp in enumerate(semana, start=1):  # días desde 1
             print(f"    Día {k} ({dias_semana[k-1]}): {temp} °C")
+
+
+# Calcula la temperatura todos los dias y semanas
+def promedio_por_ciudad(datos, nombres_ciudades):
+   
+    promedios = {}
+
+    # Recorremos cada ciudad
+    for idx_ciudad, ciudad in enumerate(nombres_ciudades):
+        total = 0      # Suma de temperaturas de esa ciudad
+        contador = 0   # Número de lecturas de esa ciudad
+
+        # Recorremos cada semana
+        for semana in datos[idx_ciudad]:
+            total += sum(semana)       # Sumamos temperaturas de la semana
+            contador += len(semana)    # Contamos los días de la semana
+
+        # Calculamosel promedio de la ciudad
+        promedios[ciudad] = total / contador
+
+    return promedios
+
+# CÓDIGO PRINCIPAL
+
+if __name__ == "__main__":
+    # Calcular promedios para todas las ciudades
+    resultados = promedio_por_ciudad(temperaturas, ciudades)
+
+    # Mostrar resultados
+    print("Promedio de temperatura por ciudad (4 semanas):")
+    for ciudad, promedio in resultados.items():
+        print(f"  {ciudad}: {promedio:.2f} °C")
